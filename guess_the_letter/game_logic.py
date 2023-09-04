@@ -63,6 +63,10 @@ def gamePlay():
     points = 0
     counter = 0
 
+    def resetLifes():
+        for el in players_list:
+            el.life = 10
+
     cleanTerminal()
     while game_over:
         print(showLife()) 
@@ -77,9 +81,10 @@ def gamePlay():
             points += data[1]
         else:
             players_list[counter].substract_life(1)
-            if(players_list[counter].life == 0):
+            if(players_list[counter].life <= 0):
                 print('You loose!')
                 input()
+                resetLifes()
                 break
 
             
@@ -93,6 +98,7 @@ def gamePlay():
         if(points == len(word)):
             print('You won!')
             input()
+            resetLifes()
             break
 
 

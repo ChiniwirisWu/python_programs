@@ -137,7 +137,6 @@ def addActivity():
         print('First you have to create a tracker on menu > option 3')
         input('\nClick to continue.')
 
-
 def app():
     appOpen = True
     while appOpen:

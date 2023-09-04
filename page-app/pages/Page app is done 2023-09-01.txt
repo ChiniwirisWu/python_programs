@@ -1,0 +1,2 @@
+It was 3 days of development, it was cool, honestly right now, I'm not on my best, but at least I have this achivement. I used pandas, csv, os, and modules. So, I used what I have learned, and also, this writing format is also good for me.
+This is something I made. It was hard, I felt insanely stupid during the development. I was sad, kinda destoyed but I didn't want to surrender, I truly wanted to end this program an use it. So: "Good job, you did well".
