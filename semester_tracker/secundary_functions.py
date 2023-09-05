@@ -1,10 +1,13 @@
 def getInt(msg:str=''):
+    print('\n')
     return int(input(msg if msg != '' else '> '))
 
 def getStr(msg:str=''):
+    print('\n')
     return str(input(msg if msg != '' else '> '))
 
 def click():
+    print('\n')
     input('click to continue')
     return True
 

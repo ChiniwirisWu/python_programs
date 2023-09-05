@@ -12,6 +12,9 @@
 import pandas as pd
 
 df = pd.read_csv('./data.csv')
+
+print(dict(df))
+
 # names = df['name']
 # print(type(names))
 #series seems similar to arrays
@@ -33,3 +36,4 @@ actual_semester_info = semesters_df[semesters_df['name'] == semester_name]
 for el in actual_semester_info.columns:
     semester_info[el] = actual_semester_info[el]
 print(semester_info)
+

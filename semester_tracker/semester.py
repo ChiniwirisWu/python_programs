@@ -1,11 +1,13 @@
 from secundary_functions import *
+from assignment import Assignment
+import numpy as np
 import pandas as pd
 import os
 import csv
 from display import Display
 from datetime import date
 
-class Semester:
+class Semester():
 
     #this properties I get them from ./semesters_log/semesters_log.csv
     def __init__(self):
@@ -40,8 +42,8 @@ class Semester:
         #parece que el objeto series si tiene clave-valor
         return dict(df)
 
-    @property
-    def exists(self):
+    @classmethod
+    def exists(cls):
         """
         This method returns if there are semesters logs registered
         """
@@ -85,12 +87,19 @@ class Semester:
             with open('./semesters_log/actual_semester.csv', mode='w') as f:
                 writer = csv.writer(f)
                 writer.writerows([['name'], [name]])
+
+            #writing actual assignments into a csv 
+            with open('./semesters_log/actual_assignments.csv', mode='w') as f:
+                writer = csv.writer(f)
+                writer.writerow(['name'])
+                for el in assignments:
+                    writer.writerow([el])
                 
 
             #creating assignments csv
             for el in assignments:
                 path = './assignments_grades/{}.csv'.format(el)
-                Assignment.createAssignment(path, el)
+                cls.createAssignment(path, el)
 
 
     @classmethod
@@ -110,8 +119,91 @@ class Semester:
         #write headers
         with open(path, mode='w') as f:
             writer = csv.writer(f)
-            writer.writerow(['grade', 'date', 'cut'])
+            writer.writerow(['grade', 'date', 'cut', 'percentage','points'])
+
+    @classmethod
+    def getAssignments(cls):
+        df = pd.read_csv('./semesters_log/actual_assignments.csv')
+        assignments = df['name']
+        return list(assignments)
+
+    @classmethod
+    def showGrades(cls):
+        assignments = cls.getAssignments()
+        Display.showTitle('Show grades') 
+        for el in assignments:
+            print(el)
+            grade = Assignment(el)
+            grades = grade.getGrades()
+            print(grades)
+            print('\n\n')
+
+    @classmethod
+    def addGrade(cls):
+        while True:
+            Display.showTitle('Add grade')
+            print('Pick a grade')
+            assigments = cls.getAssignments()
+            Display.showElementsAsOrderedList(assigments)
+            n = getInt()
+            if(n > 0 and n <= len(assigments)):
+                name = assigments[n - 1]
+                fields = {'note': int(), 'cut': int(), 'date': date.today(), 'percentage': int(), 'points' : float()}
+                for el in fields:
+                    if(el == 'date' or el == 'points'):
+                        continue
+                    Display.showTitle('Add grade')
+                    fields[el] = getInt('{}: '.format(el))
+
+                points = #TODO: I need to thought how to calculate the points that I win asuming that 20 is the 100%.
+                assignment = Assignment(name)
+                assignment.addGrade(fields['note'], fields['cut'], fields['date'], fields['percentage'], fields['points'])
+                break
+            else:
+                print('You picked and invalid option')
+                click()
+
+
+
+
+
 
 
 
         
+
+        
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
