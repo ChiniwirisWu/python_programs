@@ -25,13 +25,13 @@ class Logs(Habit, Display):
         return  df['date'][0]
      
     def showLogs(self):
-        df = pd.read_csv(self.logs_path)
         habits = self.getHabitsList()
         print(habits)
         #data = {habit:{done:[], date:[]}, habit:{done:[], date:[]}}
         #data = [[[],[]], [[],[]], [[],[]]]
         data = []
         for i in range(len(habits)):
+            df = pd.read_csv(self.logs_path)
             df = df[df['name'] == habits[i]]
             done = list(df['done']) 
             date = list(df['date'])
@@ -40,6 +40,7 @@ class Logs(Habit, Display):
             element.append(done) 
             element.append(date)
             data.append(element)
+        print(data)
 
         #show in a matplot
         for el in data:
@@ -90,7 +91,7 @@ class Logs(Habit, Display):
             if(n == -1):
                 break
             if(n >= 0 and n < df_undone.shape[0]):
-                row = df_undone.iloc[n, :]
+                row = df_undone.iloc[n - 1, :]
                 task_id = row['id']
                 print(type(task_id))
                 index = df[df['id'] == task_id].index
