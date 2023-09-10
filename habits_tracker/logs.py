@@ -23,7 +23,18 @@ class Logs(Habit, Display):
                 writer.writerow([str(date.today())])
 
         return  df['date'][0]
-     
+
+    def createLinearImages(self,elements:list):
+        arr = []
+        counter = 0 
+        for i in range(len(elements)):
+            if(i == 0):
+                arr.append(elements[i])
+            else:
+                counter = arr[i - 1] + elements[i]
+                arr.append(counter)
+        return arr
+
     def showLogs(self):
         habits = self.getHabitsList()
         print(habits)
@@ -37,10 +48,9 @@ class Logs(Habit, Display):
             date = list(df['date'])
             element = []
             element.append(habits[i])
-            element.append(done) 
+            element.append(self.createLinearImages(done)) 
             element.append(date)
             data.append(element)
-        print(data)
 
         #show in a matplot
         for el in data:
@@ -86,19 +96,16 @@ class Logs(Habit, Display):
                 input()
                 return
             self.showTitle('Mark completed habits')
-            print(df_undone)
             n = getInt('\nPick task (insert -1 to quit): ')
             if(n == -1):
                 break
             if(n >= 0 and n < df_undone.shape[0]):
-                row = df_undone.iloc[n - 1, :]
+                row = df_undone.iloc[n, :]
                 task_id = row['id']
-                print(type(task_id))
                 index = df[df['id'] == task_id].index
                 df.loc[index, ['done']] = 1
                 df = df.set_index('name')
                 data = df.to_csv()
-                print(data)
                 with open(self.logs_path, mode='w') as f:
                     f.write(data)
 
