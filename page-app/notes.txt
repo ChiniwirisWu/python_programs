@@ -1,0 +1,4 @@
+This app need a refactory. 
+
+Improvements
+1. I need to be able to cancel any process each time I want before submiting

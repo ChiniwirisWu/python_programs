@@ -34,6 +34,11 @@ def createRowInPageTracker(data:dict):
 
 def pickPage(mode):
     #mode can be all, category, type
+    showTitle('Do you want to continue? y/n')
+    a = getStr()
+    if(a != 'y'):
+        return False
+
     df = getDataFrame(mode)
     readingPages =  True
     while readingPages:
@@ -68,6 +73,11 @@ def createNewPageMetadata():
             'category':'',
             'path': ''
             }
+    showTitle('Do you want to continue? y/n')
+    a = getStr()
+    if(a != 'y'):
+        return False
+    
     for el in data:
         showTitle(el)
         if(el == 'category' or el == 'type'):
@@ -80,7 +90,8 @@ def createNewPageMetadata():
 
         elif(el == 'title'):
             #fill title
-            data[el] = '{} {}'.format(getStr('title'), data['date'])
+            title = '{} {}'.format(getStr('title'), data['date'])
+            data[el] = title
         elif(el == 'path'):
             data[el] = './pages/{}.txt'.format(data['title'])
     return data

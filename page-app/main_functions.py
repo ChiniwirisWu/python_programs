@@ -2,6 +2,8 @@ from secundary_functions import *
 
 def addNewPage():
     data = createNewPageMetadata() 
+    if(data == False):
+        return False
     createRowInPageTracker(data) #takes a dict and pushes it to the csv
     createFile(data)
 

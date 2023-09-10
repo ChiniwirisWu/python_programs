@@ -1,0 +1,9 @@
+Today I decided to program non stop until I beging to enjoy coding.
+I learned that Dataframes and csv are bulshit, in order to work with data
+Maybe I need to practice more, but it was awful to use these things to work with data.
+There are things that I didn't knew that I could do.
+Maybe the problem is that I didn't studyied enough to do this easier.
+With Dataframes, I don't know wy I could do something like: df[df[colum] == name].index, does this returns me a list of indexes where the condition inside equals true? Or said in other words: does df.index returns me a list of all the indexes within a Dataframe? The answer is Yes.
+I'm still feeling unconfortable coding. Being in front a computer and just writing and creating things with code is still hard to me, but I hope that with practice I'll be more confident and confortable doing this.
+I did wanted to give up, but I kept going, so, Good job!
+That's all. Bye! <3
