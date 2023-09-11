@@ -35,9 +35,10 @@ class Logs(Habit, Display):
                 arr.append(counter)
         return arr
 
-    def showLogs(self):
+    def showProgression(self):
         habits = self.getHabitsList()
         print(habits)
+        input('habits')
         #data = {habit:{done:[], date:[]}, habit:{done:[], date:[]}}
         #data = [[[],[]], [[],[]], [[],[]]]
         data = []
@@ -91,11 +92,13 @@ class Logs(Habit, Display):
         while True:
             df = pd.read_csv(self.logs_path)
             df_undone = df[df['done'] == 0]
+            df_undone = df_undone[df_undone['date'] == str(date.today())].reset_index()
             if(df_undone.shape[0] == 0):
                 print('You completed all your tasks for today. Congrats!')
                 input()
                 return
             self.showTitle('Mark completed habits')
+            print(df_undone)
             n = getInt('\nPick task (insert -1 to quit): ')
             if(n == -1):
                 break

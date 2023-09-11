@@ -17,7 +17,7 @@ def app():
             logs.markLog()
 
         if(option == 3):
-            logs.showLogs()
+            logs.showProgression()
         
         if(option == 4):
             habit.addHabit()
