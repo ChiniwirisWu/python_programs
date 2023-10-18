@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Index</title>
+</head>
+<body>
+				<h1>Departments:</h1><br>
+
+				<h2>Add new department</h2>
+				<form action="{% url 'tier_list:add' %}" method="POST">
+								{% csrf_token %}
+								<label for="title">Title</label>
+								<input type="text" id="title" required name="title"><br>
+
+								<label for="link">Link (url)</label>
+								<input type="text" id="link" required name="link"><br>
+
+								<label for="img">Img (url)</label>
+								<input type="text" name="img" required id="img"><br>
+
+								<label for="price">Price</label>
+								<input type="number" max=5 id="price" required name="price"><br>
+
+								<label for="location">Location</label>
+								<input type="number" max=5 name="location" required id="location"><br>
+
+								<input type="submit" value="add">
+				</form><br>
+
+				<h1>My departments: </h1>
+				{% for department in departments %}
+				<div style='display: inline-block ;border: 1px solid black; width: 500px; height: 500px; margin: 5px'>
+						<p>{{department.title}}</p>
+						<p>{{department.img}}</p>
+						<p>{{department.price}}</p>
+						<p>{{department.location}}</p>
+						<p>{{department.link}}</p>
+				</div>
+				{% endfor %}
+</body>
+</html>
