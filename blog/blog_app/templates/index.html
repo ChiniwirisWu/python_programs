@@ -31,31 +31,31 @@
 				<section id="pages-container">
 						<div id="reading-pages-container">
 								<h3>Last 1-5 pages:</h3><br><br>
-								<div class="page" id="1">
-										<div class="page-title">
-												<p>Title</p>
-												<button>Go</button>
-										</div>
-										<p class="page-description">lorem ipsu</p>
-								</div>
 
-								<div class="page" id="1">
+								{% for el in pages %}
+								<div class="page">
 										<div class="page-title">
-												<p>Title</p>
-												<button>Go</button>
+												<p>{{el.title}}</p>
+												<div>
+														<form action="{% url 'blog_app:read_page' el.id %}"><button class="go-page-btn">Go</button></form>
+														 <form action="{% url 'blog_app:remove_page' el.id %}"><button class="remove-page-btn">Remove</button></form>
+												</div>
 										</div>
-										<p class="page-description">lorem ipsu</p>
+										<p class="page-description">{{el.description}}</p>
 								</div>
+								{% endfor %}
+
 						</div>	
 
 						<div id="writing-pages-container">
 								<h3>Add page:</h3><br></br>
-								<form action="#" method="POST">
+								<form action="{% url 'blog_app:create_page' %}" method="POST">
+										{% csrf_token %}
 										<label for="title">Title: </label><br>
 										<input id="title" name="title" placeholder="..."></input><br>
 
 										<label for="content">Content: </label><br>
-										<textarea id="content"></textarea>
+										<textarea id="content" name="content"></textarea>
 										
 										<button id="discard-btn">Discard page</button>
 										<button id="submit-btn">Publish page</button>

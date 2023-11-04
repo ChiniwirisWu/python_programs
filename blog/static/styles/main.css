@@ -99,6 +99,14 @@ header{
 		border-radius: 5px;
 }
 
+.page-title div{
+		display: flex;
+}
+
+.page-title div form{
+		margin-left: 10px;
+}
+
 
 .page-title{
 		display: flex;
