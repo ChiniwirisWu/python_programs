@@ -17,8 +17,12 @@ from django.urls import reverse
 def indexView(request):
     model = models.Page
     pages = model.objects.filter(pub_date__lte=timezone.now()).order_by('pub_date')[:5]
-    return render(request, 'index.html', context={'pages':pages, 'last_connection':pages[0].pub_date})
-
+    lastconection = 0;
+    if(len(pages) > 0):
+        lastconection = pages[0].pub_date
+    else:
+        lastconection = timezone.now()
+    return render(request, 'index.html', context={'pages':pages, 'last_connection':lastconection})
 
 def createPage(request):
     model = models.Page
