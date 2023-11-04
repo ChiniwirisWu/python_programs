@@ -5,7 +5,7 @@ from . import views
 app_name = 'blog_app'
 
 urlpatterns = [
-    path('', views.IndexView.as_view(), name='index'),
+    path('', views.indexView, name='index'),
     path('create_page/', views.createPage, name='create_page'),
     path('remove/<int:page_id>/', views.removePage, name='remove_page'),
     path('read/<int:page_id>/', views.readPage, name='read_page'),

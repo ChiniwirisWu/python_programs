@@ -18,7 +18,7 @@
 						<img src="{%static "img/profile-photo.jpeg"%}" alt="profile-photo" id="profile-photo">
 						<div id="profile-title-section">
 								<h3>Sapiens</h3>
-								<p>Last connection: <b>02 November 2023</b></p>
+								<p>Last connection: <b>{{last_connection}}</b></p>
 						</div>
 				</header>	
 				<section id="options-nav">
@@ -49,13 +49,13 @@
 
 						<div id="writing-pages-container">
 								<h3>Add page:</h3><br></br>
-								<form action="{% url 'blog_app:create_page' %}" method="POST">
+								<form id="create_page_form" autocomplete='off' action="{% url 'blog_app:create_page' %}" method="POST">
 										{% csrf_token %}
 										<label for="title">Title: </label><br>
-										<input id="title" name="title" placeholder="..."></input><br>
+										<input id="title" required name="title" placeholder="..."></input><br>
 
 										<label for="content">Content: </label><br>
-										<textarea id="content" name="content"></textarea>
+										<textarea id="content" required name="content"></textarea>
 										
 										<button id="discard-btn">Discard page</button>
 										<button id="submit-btn">Publish page</button>
@@ -64,4 +64,5 @@
 				</section>
 		</div>
 </body>
+<script src="{% static 'js/main.js' %}"></script>
 </html>
