@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.views import generic
 from django.utils import timezone
 from . import models
@@ -12,23 +12,34 @@ class IndexView(generic.ListView):
     context_object_name = 'pages'
 
     def get_queryset(self):
-        return models.Page.objects.all()
+        return models.Page.objects.filter(pub_date__lte=timezone.now()).order_by('pub_date')[:5]
 
-class readPage(generic.ListView):
-    template_name = 'page.html'
-    context_object_name = 'page'
-    model = models.Page
-
-    def get_queryset(self):
-        return model.objects.get(pk=request.GET['id'])
 
 def createPage(request):
     model = models.Page
-    description = request.POST['content'][:10] + "..."
+    description = request.POST['content'][:20] + "..."
     page = model(title = request.POST['title'], content = request.POST['content'], pub_date = timezone.now(), description=description)
     page.save()
     return HttpResponseRedirect(reverse('blog_app:index'))
 
 
-def removePage(request):
-    pass
+def readPage(request, page_id):
+    model = models.Page
+    page = get_object_or_404(model, pk=page_id)
+    return render(request, 'page.html', context={'page': page})
+
+def updatPage(request):
+    model = models.Page
+    page = get_object_or_404(model, pk=request.POST['page_id'])
+    page.content = request.POST['content']
+    page.title = request.POST['title']
+    page.pub_date = timezone.now()
+    page.save()
+    return HttpResponseRedirect(reverse('blog_app:index'))
+
+
+def removePage(request, page_id):
+    model = models.Page
+    page = get_object_or_404(model, pk=page_id)
+    page.delete()
+    return HttpResponseRedirect(reverse('blog_app:index'))

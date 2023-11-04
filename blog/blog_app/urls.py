@@ -7,8 +7,9 @@ app_name = 'blog_app'
 urlpatterns = [
     path('', views.IndexView.as_view(), name='index'),
     path('create_page/', views.createPage, name='create_page'),
-    path('remove/<int:id>', views.removePage, name='remove_page'),
-    path('read/<int:id>', views.readPage.as_view(), name='read_page'),
+    path('remove/<int:page_id>/', views.removePage, name='remove_page'),
+    path('read/<int:page_id>/', views.readPage, name='read_page'),
+    path('update_page/', views.updatPage, name='update_page'),
 ]
 
 
